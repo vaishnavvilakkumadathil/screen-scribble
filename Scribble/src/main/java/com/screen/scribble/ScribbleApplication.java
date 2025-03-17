@@ -1,4 +1,4 @@
-package com.screen.Scribble;
+package com.screen.scribble;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
