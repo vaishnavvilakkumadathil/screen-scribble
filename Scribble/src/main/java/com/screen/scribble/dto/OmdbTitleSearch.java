@@ -5,16 +5,16 @@ import com.screen.scribble.model.OmdbSearchSummary;
 
 import java.util.List;
 
-public class OmdbSearch {
+public class OmdbTitleSearch {
 
     private List<OmdbSearchSummary> search;
     private int totalResults;
     private boolean response;
 
-    public OmdbSearch() {
+    public OmdbTitleSearch() {
     }
 
-    public OmdbSearch(List<OmdbSearchSummary> search, int totalResults, boolean response) {
+    public OmdbTitleSearch(List<OmdbSearchSummary> search, int totalResults, boolean response) {
         this.search = search;
         this.totalResults = totalResults;
         this.response = response;
