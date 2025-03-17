@@ -2,9 +2,13 @@ package com.screen.scribble.service;
 
 import com.screen.scribble.config.OmdbConfig;
 import com.screen.scribble.dto.OmdbDetails;
+import com.screen.scribble.dto.OmdbSearch;
 import com.screen.scribble.model.LogModel;
+import com.screen.scribble.model.OmdbSearchSummary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class OmdbService {
@@ -28,4 +32,15 @@ public class OmdbService {
         String url = String.format("%s?apikey=%s&s=%s", baseUrl, apiKey, title);
         return restTemplate.getForObject(url, OmdbDetails.class);
     }
+
+    public OmdbSearchSummary searchsByTitle(String title) {
+        String url = String.format("%s?apikey=%s&s=%s", baseUrl, apiKey, title);
+        return restTemplate.getForObject(url, OmdbSearchSummary.class);
+    }
+
+    public OmdbSearch searchByTitle(String title) {
+        String url = String.format("%s?apikey=%s&s=%s", baseUrl, apiKey, title);
+        return restTemplate.getForObject(url, OmdbSearch.class);
+    }
+
 }
