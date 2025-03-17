@@ -2,12 +2,11 @@ package com.screen.scribble.service;
 
 import com.screen.scribble.config.OmdbConfig;
 import com.screen.scribble.dto.OmdbDetails;
-import com.screen.scribble.dto.OmdbSearch;
-import com.screen.scribble.model.LogModel;
-import com.screen.scribble.model.OmdbSearchSummary;
+import com.screen.scribble.dto.OmdbTitleSearch;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,25 +21,13 @@ public class OmdbService {
         this.restTemplate = restTemplate;
     }
 
-    public OmdbDetails getMovieById(String id) {
+    public List<OmdbTitleSearch> searchByTitle(String title) {
+        String url = String.format("%s?apikey=%s&s=%s", baseUrl, apiKey, title);
+        return Collections.singletonList(restTemplate.getForObject(url, OmdbTitleSearch.class));
+    }
+
+    public List<OmdbDetails> searchById(String id) {
         String url = String.format("%s?apikey=%s&i=%s", baseUrl, apiKey, id);
-        String jsonResponse = restTemplate.getForObject(url, String.class);
-        return restTemplate.getForObject(url, OmdbDetails.class);
+        return Collections.singletonList(restTemplate.getForObject(url, OmdbDetails.class));
     }
-
-    public OmdbDetails getMovieByTitle(String title) {
-        String url = String.format("%s?apikey=%s&s=%s", baseUrl, apiKey, title);
-        return restTemplate.getForObject(url, OmdbDetails.class);
-    }
-
-    public OmdbSearchSummary searchsByTitle(String title) {
-        String url = String.format("%s?apikey=%s&s=%s", baseUrl, apiKey, title);
-        return restTemplate.getForObject(url, OmdbSearchSummary.class);
-    }
-
-    public OmdbSearch searchByTitle(String title) {
-        String url = String.format("%s?apikey=%s&s=%s", baseUrl, apiKey, title);
-        return restTemplate.getForObject(url, OmdbSearch.class);
-    }
-
 }
